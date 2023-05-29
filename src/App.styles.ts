@@ -1,5 +1,5 @@
-import styled, { createGlobalStyle } from "styled-components";
-import BGImage from "./images/questionbackground.jpg";
+import styled, { createGlobalStyle } from 'styled-components';
+import BGImage from './images/questionbackground.jpg';
 
 export const GlobalStyle = createGlobalStyle`
 html {
@@ -25,7 +25,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  > p {
+  p {
     color: #fff;
   }
   .score {
@@ -34,7 +34,7 @@ export const Wrapper = styled.div`
     margin: 0;
   }
   h1 {
-    font-family: Fascinate Impact, Haettenschweiler, "Arial Narrow Bold",
+    font-family: Fascinate Impact, Haettenschweiler, 'Arial Narrow Bold',
       sans-serif;
     background-image: linear-gradient(180deg, #fff, #d14144);
     background-size: 100%;
@@ -51,7 +51,9 @@ export const Wrapper = styled.div`
   }
 
   .start,
-  .next {
+  .next,
+  .input,
+  .amount {
     cursor: pointer;
     background: linear-gradient(180deg, #fff, #d14144);
     border: 2px solid #af2726;
@@ -65,5 +67,14 @@ export const Wrapper = styled.div`
 
   .start {
     max-width: 200px;
+  }
+
+  .input {
+    padding: 0 20px;
+  }
+
+  .amount {
+    cursor: default;
+    padding: 5px 20px;
   }
 `;

@@ -1,4 +1,6 @@
-import { shuffleArray } from "./utils";
+import { useEffect } from 'react';
+import { shuffleArray } from './utils';
+import axios from 'axios';
 
 export type Question = {
   category: string;
@@ -12,16 +14,24 @@ export type Question = {
 export type QuestionState = Question & { answers: string[] };
 
 export enum Difficulty {
-  EASY = "easy",
-  MEDIUM = "medium",
-  HARD = "hard",
+  ANY = '',
+  EASY = 'easy',
+  MEDIUM = 'medium',
+  HARD = 'hard',
+}
+
+export enum Type {
+  ANY = '',
+  MULTIPLE = 'multiple',
+  BOOLEAN = 'boolean',
 }
 
 export const fetchQuizQuestions = async (
   amount: number,
-  difficulty: Difficulty
+  difficulty: Difficulty,
+  type: Type
 ) => {
-  const endpoint = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=multiple`;
+  const endpoint = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=${type}`;
   const data = await (await fetch(endpoint)).json();
   return data.results.map((question: Question) => ({
     ...question,
@@ -31,3 +41,25 @@ export const fetchQuizQuestions = async (
     ]),
   }));
 };
+
+// export const FetchQuizQuestions = (
+//   amount: number,
+//   difficulty: Difficulty,
+//   type: Type
+// ) => {
+//   useEffect(() => {
+//     axios
+//       .get(
+//         `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=${type}`
+//       )
+//       .then((res) => {
+//         return res.data.results.map((question: Question) => ({
+//           ...question,
+//           answers: shuffleArray([
+//             ...question.incorrect_answers,
+//             question.correct_answer,
+//           ]),
+//         }));
+//       });
+//   }, []);
+// };
