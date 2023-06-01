@@ -70,11 +70,7 @@ export const Wrapper = styled.div`
   }
 
   .input {
-    padding: 0 20px;
-  }
-
-  .amount {
-    cursor: default;
-    padding: 5px 20px;
+    padding: 0 5px;
+    text-align: center;
   }
 `;
