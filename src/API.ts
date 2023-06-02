@@ -25,8 +25,8 @@ export type QuestionState = Question & { answers: string[] };
 // }
 
 export const fetchQuizQuestions = async (
-  amount: number,
-  category: number,
+  amount: number | string,
+  category: number | string,
   difficulty: string,
   type: string
 ) => {

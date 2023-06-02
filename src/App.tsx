@@ -22,12 +22,8 @@ const App = () => {
   const [userAnswers, setUserAnswers] = useState<AnswerObject[]>([]);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(true);
-  // const [categories, setCategories] = useState([])
-  // const [totalQuestions, setTotalQuestions] = useState(10);
-  // const [difficulty, setDifficulty] = useState(['', 'easy', 'medium', 'hard']);
-  // const [type, setType] = useState([Type.ANY, Type.BOOLEAN, Type.MULTIPLE]);
   const [formData, setFormData] = useState({
-    totalQuestions: 10,
+    totalQuestions: 5,
     difficulty: '',
     type: '',
     category: '',
@@ -35,7 +31,9 @@ const App = () => {
 
   const { totalQuestions, difficulty, type, category } = formData;
 
-  const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => {
       return {
@@ -45,22 +43,15 @@ const App = () => {
     });
   };
 
-  // const updateTotalQuestions = (newValue: number) => {
-  //   setTotalQuestions(newValue);
-  // };
-
   const startTrivia = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setGameOver(false);
     const newQuestions = await fetchQuizQuestions(
-      // totalQuestions,
-      // difficulty,
-      // Type.ANY
       totalQuestions,
+      category,
       difficulty,
-      type,
-      category
+      type
     );
 
     setQuestions(newQuestions);
@@ -107,8 +98,8 @@ const App = () => {
           <HomePage
             isGameOver={gameOver}
             startTrivia={startTrivia}
-            // updateTotalQuestions={updateTotalQuestions}
             handleChange={handleChange}
+            formData={formData}
           />
         ) : null}
 

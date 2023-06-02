@@ -4,7 +4,15 @@ type Props = {
   isGameOver: boolean;
   startTrivia: (e: FormEvent) => void;
   // updateTotalQuestions: (newValue: number) => void;
-  handleChange: (e: React.ChangeEvent<HTMLFormElement>) => void;
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
+  formData: {
+    totalQuestions: number;
+    difficulty: string;
+    type: string;
+    category: string;
+  };
 };
 
 const HomePage: React.FC<Props> = ({
@@ -12,10 +20,13 @@ const HomePage: React.FC<Props> = ({
   startTrivia,
   // updateTotalQuestions,
   handleChange,
+  formData,
 }) => {
   // const [inputValue, setInputValue] = useState(10);
+  const { totalQuestions, difficulty, type, category } = formData;
 
   const triviaCategories = [
+    { id: 8, name: '' },
     { id: 9, name: 'General Knowledge' },
     { id: 10, name: 'Entertainment: Books' },
     { id: 11, name: 'Entertainment: Film' },
@@ -52,57 +63,63 @@ const HomePage: React.FC<Props> = ({
       <h1>React Quiz</h1>
       <form onSubmit={startTrivia}>
         <div>
-          <label htmlFor='amount'>Number of Questions</label>
+          <label htmlFor='totalQuestions'>Number of Questions</label>
           <input
-            className='input'
+            id='totalQuestions'
             type='number'
             min='1'
             max='50'
             step='1'
-            value={10}
-            name='amount'
+            value={totalQuestions}
+            name='totalQuestions'
             onChange={handleChange}
           />
         </div>
         <div>
-          <label htmlFor='difficulty'>Questions Difficulty</label>
-          <select name='selectDifficulty' onChange={handleChange}>
-            <option value=''>Any</option>
-            <option value='easy'>Easy</option>
-            <option value='medium'>Medium</option>
-            <option value='hard'>Hard</option>
+          <label htmlFor='difficulty'>Difficulty of Questions</label>
+          <select name='difficulty' value={difficulty} onChange={handleChange}>
+            <option id='difficulty' value=''>
+              Any
+            </option>
+            <option id='difficulty' value='easy'>
+              Easy
+            </option>
+            <option id='difficulty' value='medium'>
+              Medium
+            </option>
+            <option id='difficulty' value='hard'>
+              Hard
+            </option>
           </select>
         </div>
         <div>
           <label htmlFor='type'>Type of Questions</label>
-          <select name='selectType' onChange={handleChange}>
-            <option value=''>Any</option>
-            <option value='multiple'>Multiple Choice</option>
-            <option value='boolean'>True/False</option>
+          <select name='type' value={type} onChange={handleChange}>
+            <option id='type' value=''>
+              Any
+            </option>
+            <option id='type' value='multiple'>
+              Multiple Choice
+            </option>
+            <option id='type' value='boolean'>
+              True/False
+            </option>
           </select>
         </div>
         <div>
-          <label htmlFor='type'>Question Category</label>
-          <select name='selectCategory' onChange={handleChange}>
+          <label htmlFor='category'>Category of Questions</label>
+          <select name='category' value={category} onChange={handleChange}>
             {triviaCategories.map((category) => {
               return (
-                <option key={category.id} value={category.id}>
-                  {category.name}
+                <option key={category.id} id='category' value={category.id}>
+                  {category.name ? category.name : 'Any'}
                 </option>
               );
             })}
           </select>
         </div>
-        <div>
-          <button
-            className='start'
-            // onClick={() => {
-            //   updateTotalQuestions(inputValue);
-            // }}
-          >
-            {isGameOver ? 'Start' : 'Try again'}
-          </button>
-        </div>
+
+        <button className='start'>{isGameOver ? 'Start' : 'Try again'}</button>
       </form>
     </>
   );

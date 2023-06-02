@@ -22,12 +22,18 @@ body {
 `;
 
 export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  p {
+  p,
+  label {
     color: #fff;
+    margin: 10px;
   }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
   .score {
     color: #fff;
     font-size: 2rem;
@@ -52,25 +58,23 @@ export const Wrapper = styled.div`
 
   .start,
   .next,
-  .input,
-  .amount {
+  input,
+  select {
     cursor: pointer;
     background: linear-gradient(180deg, #fff, #d14144);
     border: 2px solid #af2726;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
-    height: 40px;
-    margin: 20px 0;
-    padding: 0 40px;
     font-size: 1rem;
+    padding: 0 5px;
+  }
+
+  input {
+    text-align: center;
   }
 
   .start {
-    max-width: 200px;
-  }
-
-  .input {
-    padding: 0 5px;
-    text-align: center;
+    padding: 10px 20px;
+    align-self: center;
   }
 `;
