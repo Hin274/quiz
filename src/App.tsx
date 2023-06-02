@@ -7,6 +7,7 @@ import { QuestionState } from './API';
 //styles
 import { GlobalStyle, Wrapper } from './App.styles';
 import HomePage from './components/HomePage';
+import Questions from './components/Questions';
 
 export type AnswerObject = {
   question: string;
@@ -102,26 +103,18 @@ const App = () => {
             formData={formData}
           />
         ) : null}
-
-        {!gameOver && <p className='score'>Score: {score}</p>}
-        {loading && <p>Loading Questions ...</p>}
-        {!loading && !gameOver && (
-          <QuestionCard
-            questionNumber={number + 1}
+        {!gameOver ? (
+          <Questions
+            loading={loading}
+            questions={questions}
+            number={number}
+            score={score}
             totalQuestions={totalQuestions}
-            question={questions[number].question}
-            answers={questions[number].answers}
-            userAnswer={userAnswers ? userAnswers[number] : undefined}
-            callback={checkAnswer}
+            userAnswers={userAnswers}
+            checkAnswer={checkAnswer}
+            nextQuestion={nextQuestion}
+            gameOver={gameOver}
           />
-        )}
-        {!gameOver &&
-        !loading &&
-        userAnswers.length === number + 1 &&
-        number !== totalQuestions - 1 ? (
-          <button className='next' onClick={nextQuestion}>
-            Next Question
-          </button>
         ) : null}
       </Wrapper>
     </>

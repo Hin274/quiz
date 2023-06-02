@@ -1,9 +1,8 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent } from 'react';
 
 type Props = {
   isGameOver: boolean;
   startTrivia: (e: FormEvent) => void;
-  // updateTotalQuestions: (newValue: number) => void;
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
@@ -18,11 +17,9 @@ type Props = {
 const HomePage: React.FC<Props> = ({
   isGameOver,
   startTrivia,
-  // updateTotalQuestions,
   handleChange,
   formData,
 }) => {
-  // const [inputValue, setInputValue] = useState(10);
   const { totalQuestions, difficulty, type, category } = formData;
 
   const triviaCategories = [
@@ -52,11 +49,6 @@ const HomePage: React.FC<Props> = ({
     { id: 31, name: 'Entertainment: Japanese Anime & Manga' },
     { id: 32, name: 'Entertainment: Cartoon & Animations' },
   ];
-
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const value = Number(e.currentTarget.value);
-  //   setInputValue(value);
-  // };
 
   return (
     <>
